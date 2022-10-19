@@ -5,6 +5,45 @@ from timeloop import Timeloop
 from datetime import timedelta
 from twilio.rest import Client
 
+#code added by Sachin
+def getStockData(ticker):
+    base_url = "https://financialmodelingprep.com/api/v3/quote/"
+    key = "771b5a44aa3356ba5194abbfc2e84de3"
+    full_url = base_url + ticker + "?apikey=" + key
+    r = requests.get(full_url)
+    stock_data= r.json()
+    return stock_data
+
+#code added by Nakshatra
+def generateMessage(data):
+    symbol = data[0]['symbol']
+    price = data[0]["price"]
+    changesPercent = data[0]["changesPercentage"]
+    timestamp = data[0]['timestamp']
+    
+    current = datetime.fromtimestamp(timestamp)
+    message = "Hello! This  is the Stock Market Details "+str(current)
+    message += "\n" + symbol 
+    message += "\n$" + str(price)    
+    if(changesPercent < -2):
+        message += "\nWarning! Price drop more than 2%!"
+        
+    return message
+
+#code added by Shivam
+
+def sendMessage(text):
+    account_sid = "SID" # Your Account SID from twilio.com/console
+    auth_token  = "Token" # Your Auth Token from twilio.com/console
+
+    client = Client(account_sid, auth_token)
+
+    message = client.messages.create(
+        to="XXX", #enter your verified phone number
+        from_="+14255411934",
+        body=text)
+
+    print(message.sid)
 #code added by Aakshita
 
 tl = Timeloop()
