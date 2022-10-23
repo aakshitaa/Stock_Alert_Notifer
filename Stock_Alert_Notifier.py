@@ -5,7 +5,6 @@ from timeloop import Timeloop
 from datetime import timedelta
 from twilio.rest import Client
 
-#code added by Sachin
 def getStockData(ticker):
     base_url = "https://financialmodelingprep.com/api/v3/quote/"
     key = "771b5a44aa3356ba5194abbfc2e84de3"
@@ -14,7 +13,6 @@ def getStockData(ticker):
     stock_data= r.json()
     return stock_data
 
-#code added by Nakshatra
 def generateMessage(data):
     symbol = data[0]['symbol']
     price = data[0]["price"]
@@ -30,8 +28,6 @@ def generateMessage(data):
         
     return message
 
-#code added by Shivam
-
 def sendMessage(text):
     account_sid = "SID" # Your Account SID from twilio.com/console
     auth_token  = "Token" # Your Auth Token from twilio.com/console
@@ -44,7 +40,6 @@ def sendMessage(text):
         body=text)
 
     print(message.sid)
-#code added by Aakshita
 
 tl = Timeloop()
 
